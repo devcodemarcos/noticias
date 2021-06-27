@@ -10,6 +10,6 @@
 
 ## 2.- [NOTA]
 
-Agregar estas dos constantes con sus respectivos valores al final del archivo .env
+Agregar esta constante al final del archivo .env con su respectivo valor
 
 - NEWS_APP_KEY=your_news_api_key
