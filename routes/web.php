@@ -14,4 +14,4 @@ use App\Http\Controllers\NewsController;
 |
 */
 
-Route::get('/', [NewsController::class, 'index']);
+Route::get('/', [NewsController::class, 'index'])->name('home');

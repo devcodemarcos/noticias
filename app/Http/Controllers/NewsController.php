@@ -4,45 +4,37 @@ namespace App\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Http\Request;
-use jcobhams\NewsApi\NewsApi;
 
+use App\Models\Author;
+use App\Models\News;
 
 class NewsController extends Controller
 {
-
-    private $page_size = 10;
-
     public function index(Request $request)
     {
         $page = $request->get('page') ?? 1;
+        $pageSize = 10;
 
-        $q = "Apple";
-        $sources = null;
-        $domains = null;
-        $exclude_domains = null;
-        $from = "2021-06-26";
-        $to = null;
-        $language = 'en';
-        // $sort_by = "popularity";
-        $sort_by = null;
+        try {
+            $news = News::getNews($pageSize, $page);
+        } catch (\GuzzleHttp\Exception\RequestException $e) {
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+                $error = json_decode((string) $response->getBody());
+                return view('sections.error', compact('error'));
+            }
+        }
 
-        $key = env('NEWS_APP_KEY', null);
-        $newsApi = new NewsApi($key);
-        $response = $newsApi->getEverything($q, $sources, $domains, $exclude_domains, $from, $to, $language, $sort_by, $this->page_size, $page);
-        $news = $response->articles;
-        // dd($response);
-        // dd($news);
+        $authors = Author::getAuthors($pageSize);
 
         $currentPage = Paginator::resolveCurrentPage();
-        $col = collect($news);
-        $currentPageItems = $col->slice(($currentPage - 1) * $this->page_size, $this->page_size)->all();
+        $col = collect($news->articles);
+        $currentPageItems = $col->slice(($currentPage - 1) * $pageSize, $pageSize)->all();
 
-        // $items = new Paginator($currentPageItems, count($col), $perPage);
-        $items = new Paginator($currentPageItems, $response->totalResults, $this->page_size);
-        $items->setPath($request->url());
-        $items->appends($request->all());
-        // dd($items);
+        $paginator = new Paginator($currentPageItems, $news->totalResults, $pageSize);
+        $paginator->setPath($request->url());
+        $paginator->appends($request->all());
 
-        return view('sections.news', compact('news', 'items'));
+        return view('sections.news', compact('news', 'authors', 'paginator'));
     }
 }

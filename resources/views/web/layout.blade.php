@@ -11,14 +11,11 @@
 
     <script src="{{ mix('js/app.js') }}" defer></script>
 
-    <!-- Font Awesome icons (free version)-->
-    <!-- <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script> -->
-
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
 
-    <!-- Core theme CSS (includes Bootstrap)-->
+    <!-- Bootstrap-->
     <link href="{{ asset('css/bootstrap5.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
@@ -27,7 +24,16 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="index.html">Noticias<span class="text-danger h1">.</span>MX</a>
+            <span class="navbar-brand">Noticias<span class="text-danger h1">.</span>MX</span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ route('home') }}">Inicio</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -37,7 +43,6 @@
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="site-heading">
-                        <!-- <h1>Clean Blog</h1> -->
                         <span class="subheading">Por Marcos Villavicencio</span>
                     </div>
                 </div>
