@@ -3,7 +3,7 @@
 - PHP 7.4 >=
 - NODE 12.10 >=
 
-## 2.- [INSTALACION]
+## 2.- [INSTALACION CLI]
 
 - Clonar el proyecto noticias
 - $ cd path/to/clone/project/noticias
@@ -12,6 +12,7 @@
 - $ php artisan key:generate
 - $ npm install
 - $ npm run dev
+- [opcional] $ php artisan serve
 
 ## 3.- [NOTA]
 
