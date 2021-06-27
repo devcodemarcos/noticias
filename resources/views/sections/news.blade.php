@@ -16,7 +16,7 @@
                 <a href="mailto:{{ $authors[$index]->email }}">
                     {{ $authors[$index]->fullname }}
                 </a>
-                en {{ $new->publishedAt }}
+                el {{ iconv('ISO-8859-2', 'UTF-8', strftime("%A, %d de %B de %Y", strtotime($new->publishedAt))) }}
             </p>
         </div>
         <!-- Divider-->

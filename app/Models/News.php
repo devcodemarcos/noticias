@@ -14,7 +14,7 @@ class News extends Model
     {
         $key = env('NEWS_APP_KEY', false);
         $newsApi = new NewsApi($key);
-        $response = $newsApi->getEverything('Apple', null, null, null, '2021-06-26', null, 'es', null, $pageSize, $page);
+        $response = $newsApi->getEverything('Apple', null, null, null, '2021-06-26', '2021-06-28', 'es', null, $pageSize, $page);
         return (object) [
             'totalResults' => $response->totalResults,
             'articles' => $response->articles

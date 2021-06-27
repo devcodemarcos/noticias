@@ -35,6 +35,7 @@ class NewsController extends Controller
         $paginator->setPath($request->url());
         $paginator->appends($request->all());
 
+        setlocale(LC_ALL, "es_ES", 'Spanish_Spain', 'Spanish'); //Formato de fecha a español
         return view('sections.news', compact('news', 'authors', 'paginator'));
     }
 }
